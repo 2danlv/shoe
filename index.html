@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Drag and Drop</title>
+    <script src='https://code.jquery.com/jquery-3.7.1.min.js'></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+    <script src="https://wowjs.uk/dist/wow.min.js"></script>
+    <link rel="stylesheet" href="https://wowjs.uk/css/libs/animate.css">
+    <style>
+        * {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            position: relative;
+            margin: 0 auto;
+        }
+        .logo {
+            position: absolute;
+            width: 100%;
+            left: 0;
+            top: 0;
+            text-align: center;
+            padding: 10px 20px;
+        }
+        .container img {
+            max-width: 100%;
+            vertical-align: middle;
+        }
+
+        .nv, .shoe {
+            position: absolute;
+        }
+        .nv {
+            opacity: 0.7;
+        }
+        .nv.active {
+            opacity: 1;
+            transition: .5s;
+        }
+        .nv1 {
+            top: 10%;
+            left: 0;
+        }
+        .nv1 img {
+            max-width: 200px;
+            max-height: 300px;
+        }
+        .nv2 {
+            top: 30%;
+            left: 30%;
+        }
+        .nv2 img {
+            max-width: 220px;
+        }
+        .nv3 {
+            top: 50%;
+            left: 0%;
+        }
+
+        .nv4 {
+            bottom: 0%;
+            left: 35%;
+        }
+
+        /* Responsive Positioning of .shoe elements */
+        .shoe {
+            right: 5%;
+            width: 20%;
+        }
+        .shoe.ui-draggable-disabled {
+            opacity: 0;
+            transition: 0.5s;
+        }
+        .shoe1 {
+            top: 10%;
+        }
+
+        .shoe2 {
+            top: 30%;
+        }
+
+        .shoe3 {
+            top: 50%;
+        }
+
+        .shoe4 {
+            bottom: 10%;
+        }
+
+        /* Small Screen Adjustments */
+        @media (max-width: 768px) {
+            .nv, .shoe {
+                
+            }
+            .nv img {
+                max-height: 250px;
+            }
+            .nv3 img {
+                max-height: 340px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                min-width: 375px;
+            }
+            .nv, .shoe {
+                 
+            }
+            .nv img {
+                max-height: 200px;
+            }
+            .nv1 {
+                top: 8%;
+            }
+            .nv1 img {
+                max-width: 140px;
+                max-height: 300px;
+            }
+            .nv2 {
+                top: 35%;
+                left: 26%;
+            }
+            .nv2 img {
+                max-width: 140px;
+                max-height: 300px;
+            }
+            .nv3 {
+                top: 45%;
+                
+            }
+            .nv3 img {
+                max-width: 110px;
+                max-height: 300px;
+            }
+            .nv4 {
+                 
+            }
+
+            .shoe {
+                 
+            }
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            new WOW().init();
+            // Enable draggable with revert functionality
+            $(".shoe").draggable({
+                revert: true,
+                stop:  function checkIfAllActive() {
+                        if ($(".nv1").hasClass("active") &&
+                        $(".nv2").hasClass("active") &&
+                        $(".nv3").hasClass("active") &&
+                        $(".nv4").hasClass("active")) {
+                            setTimeout(() => {
+                                alert("Kết nối Internet thành công!");
+                            }, 1500);
+                            
+                        }
+                    }
+            });
+
+            // Droppable targets with revert control
+            $(".nv1").droppable({
+                accept: ".shoe1",
+                
+                drop: function() {
+                    $(".nv1").addClass("active");
+                    $(".shoe1").draggable({
+                        revert: false,
+                        disabled: true
+                    });
+                }
+            });
+            $(".nv2").droppable({
+                accept: ".shoe2",
+                drop: function() {
+                    $(".nv2").addClass("active");
+                    $(".shoe2").draggable({
+                        revert: false,
+                        disabled: true
+                    });
+                }
+            });
+            $(".nv3").droppable({
+                accept: ".shoe3",
+                drop: function() {
+                    $(".nv3").addClass("active");
+                    $(".shoe3").draggable({
+                        revert: false,
+                        disabled: true
+                    });
+                }
+            });
+            $(".nv4").droppable({
+                accept: ".shoe4",
+                drop: function() {
+                    $(".nv4").addClass("active");
+                    $(".shoe4").draggable({
+                        revert: false,
+                        disabled: true
+                    });
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="images/logo.png" alt="">
+        </div>
+        <div class="bg">
+            <img src="images/bg.jpg" alt="Background">
+        </div>
+        <div class="group-nv">
+            <div class="nv1 nv">
+                <img class=" wow bounceInRight" data-wow-duration="0.7s" data-wow-delay="0.6s" src="images/nv1.png" alt="nv1">
+            </div>
+            <div class="nv2 nv">
+                <img class=" wow bounceInLeft" data-wow-duration="0.6s" data-wow-delay="0.5s" src="images/nv2.png" alt="nv2">
+            </div>
+            <div class="nv3 nv">
+                <img class=" wow bounceInRight" data-wow-duration="0.8s" data-wow-delay="0.7s" src="images/nv3.png" alt="nv3">
+            </div>
+            <div class="nv4 nv">
+                <img class="wow bounceInUp" data-wow-duration="0.9s" data-wow-delay="0.8s" src="images/nv4.png" alt="nv4">
+            </div>
+        </div>
+        <div class="group-shoe">
+            <div class="shoe shoe1">
+                <img class="wow bounceInRight" data-wow-duration="0.5s" data-wow-delay="0.5s" src="images/shoe1.png" alt="shoe1">
+            </div>
+            <div class="shoe shoe2">
+                <img class="wow bounceInRight" data-wow-duration="0.6s" data-wow-delay="0.5s" src="images/shoe2.png" alt="shoe2">
+            </div>
+            <div class="shoe shoe3">
+                <img class="wow bounceInRight" data-wow-duration="0.7s" data-wow-delay="0.5s" src="images/shoe3.png" alt="shoe3">
+            </div>
+            <div class="shoe shoe4">
+                <img class="wow bounceInRight" data-wow-duration="0.8s" data-wow-delay="0.5s" src="images/shoe4.png" alt="shoe4">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
