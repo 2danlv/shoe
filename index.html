@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Drag and Drop</title>
+    <title>Responsive</title>
     <script src='https://code.jquery.com/jquery-3.7.1.min.js'></script>
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
@@ -169,41 +169,41 @@
 
             // Droppable targets with revert control
             $(".nv1").droppable({
-                accept: ".shoe1",
+                accept: ".shoe4",
                 
                 drop: function() {
                     $(".nv1").addClass("active");
-                    $(".shoe1").draggable({
+                    $(".shoe4").draggable({
                         revert: false,
                         disabled: true
                     });
                 }
             });
             $(".nv2").droppable({
-                accept: ".shoe2",
-                drop: function() {
-                    $(".nv2").addClass("active");
-                    $(".shoe2").draggable({
-                        revert: false,
-                        disabled: true
-                    });
-                }
-            });
-            $(".nv3").droppable({
                 accept: ".shoe3",
                 drop: function() {
-                    $(".nv3").addClass("active");
+                    $(".nv2").addClass("active");
                     $(".shoe3").draggable({
                         revert: false,
                         disabled: true
                     });
                 }
             });
-            $(".nv4").droppable({
+            $(".nv3").droppable({
                 accept: ".shoe4",
                 drop: function() {
-                    $(".nv4").addClass("active");
+                    $(".nv3").addClass("active");
                     $(".shoe4").draggable({
+                        revert: false,
+                        disabled: true
+                    });
+                }
+            });
+            $(".nv4").droppable({
+                accept: ".shoe1",
+                drop: function() {
+                    $(".nv4").addClass("active");
+                    $(".shoe1").draggable({
                         revert: false,
                         disabled: true
                     });
